@@ -11,7 +11,7 @@ public class TodoList {
         this.date = date;
     }
 
-    public String getTodo(){
+    public String getName(){
         return todo;
     }
     public String getDetails(){

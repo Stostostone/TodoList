@@ -2,6 +2,8 @@ package Source.ToDoList;
 
 import java.util.ArrayList;
 
+//TODO: 修改数据读取，用TodoService返回对象，再用对象的方法读取数据  状态:✔️
+
 public class TodoService {
     private ArrayList<TodoList> todo = new ArrayList<>();
 
@@ -28,19 +30,11 @@ public class TodoService {
         todo.get(index).setDate(date);
     }
 
-    public String getTodoName(int index){
-        return todo.get(index).getTodo();
-    }
-
-    public  String getTodoDetail(int index){
-        return todo.get(index).getDetails();
-    }
-
-    public String getTodoDate(int index){
-        return todo.get(index).getDate();
-    }
-
     public int getSize(){
         return todo.size();
+    }
+
+    public TodoList getTodo(int index){
+        return todo.get(index);
     }
 }
