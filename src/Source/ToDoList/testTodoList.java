@@ -1,17 +1,25 @@
 package Source.ToDoList;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+
+//TODO:加退出功能,输入校验
+//TODO: 加文件持久
 
 public class testTodoList {
     public static void main(String[] args){
 
         TodoService todoService = new TodoService();
         Scanner input = new Scanner(System.in);
+        boolean flag =true;
 
-        while(true){
-            System.out.println("1:add a todo 2:delete a todo 3:display all 4:reset Todo");
+        while(flag){
+            System.out.println("1:add a todo | 2:delete a todo | 3:display all | 4:reset Todo | 5:exit");
 
+            if (!input.hasNextInt()) {
+                System.out.println("Invalid input");
+                input.nextLine();
+                continue;
+            }
             int enter = input.nextInt();
             input.nextLine();
 
@@ -20,10 +28,10 @@ public class testTodoList {
                     System.out.println("Enter todo name: ");
                     String todoName = input.nextLine();
                     System.out.println("Enter todo details: ");
-                    String Details = input.nextLine();
+                    String details = input.nextLine();
                     System.out.println("Enter todo endDate: ");
-                    String Date = input.nextLine();
-                    todoService.addTodo(todoName,Details,Date);
+                    String date = input.nextLine();
+                    todoService.addTodo(todoName,details,date);
                     break;
                 case 2:
                     System.out.println("Enter Index to delete: ");
@@ -43,7 +51,7 @@ public class testTodoList {
                     System.out.print("   name       detail       date\n");
                     for (int i = 0; i < todoService.getSize(); i++){
                     System.out.print((i+1) + ": ");
-                    System.out.printf("%-10s %-15s %-20s\n",todoService.getTodoName(i),todoService.getTodoDetail(i),todoService.getTodoDate(i));
+                    System.out.printf("%-10s %-15s %-20s\n",todoService.getTodo(i).getName(),todoService.getTodo(i).getDetails(),todoService.getTodo(i).getDate());
                     }
                     if (todoService.getSize() == 0){
                         System.out.println("no todo");
@@ -53,14 +61,14 @@ public class testTodoList {
                 case 4:
                     System.out.println("Choose the todo you want to reset");
 
-                    int Index = input.nextInt();
+                    int newIndex = input.nextInt();
                     input.nextLine();
-                    if (Index > todoService.getSize() || Index < 1){
+                    if (newIndex > todoService.getSize() || newIndex < 1){
                         System.out.println("todo is not exist");
                             break;
                         }
 
-                    Index = Index - 1;
+                    newIndex = newIndex - 1;
 
                     System.out.println("Choose the part 1:name 2:detail 3:date 4:all");
 
@@ -69,33 +77,34 @@ public class testTodoList {
 
                     switch (reset){
                         case 1:
-                            System.out.println("Enter new name: ");
-                            String name = input.nextLine();
-                            todoService.setTodoName(name, Index);
+                            System.out.println("Enter new Name: ");
+                            String newName = input.nextLine();
+                            todoService.setTodoName(newName, newIndex);
                             break;
                         case 2:
-                            System.out.println("Enter new detail: ");
-                            String detail = input.nextLine();
-                            todoService.setTodoDetail(detail, Index);
+                            System.out.println("Enter new Detail: ");
+                            String newDetail = input.nextLine();
+                            todoService.setTodoDetail(newDetail, newIndex);
                             break;
                         case 3:
                             System.out.println("Enter new date: ");
-                            String date = input.nextLine();
-                            todoService.setTodoDate(date, Index);
+                            String newDate = input.nextLine();
+                            todoService.setTodoDate(newDate, newIndex);
                             break;
                         case 4:
-                            System.out.println("Enter new name: ");
-                            String name1 = input.nextLine();
-                            todoService.setTodoName(name1, Index);
-                            System.out.println("Enter new detail: ");
-                            String detail1 = input.nextLine();
-                            todoService.setTodoDetail(detail1, Index);
+                            System.out.println("Enter new Name: ");
+                            String nameAll = input.nextLine();
+                            todoService.setTodoName(nameAll, newIndex);
+                            System.out.println("Enter new Detail: ");
+                            String detailAll = input.nextLine();
+                            todoService.setTodoDetail(detailAll, newIndex);
                             System.out.println("Enter new date: ");
-                            String date1 = input.nextLine();
-                            todoService.setTodoDate(date1, Index);
+                            String dateAll = input.nextLine();
+                            todoService.setTodoDate(dateAll, newIndex);
                             break;
                     }
                     break;
+                case 5: System.out.println("Bye"); flag = false; break;
             }
         }
     }
