@@ -1,69 +1,61 @@
 package Ui;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class UiApp extends Application {
-
-    //TODO: 添加TODOList完整逻辑  状态:❌
-    //TODO: 添加流畅动画  状态:❌
-    //TODO: 美化  状态:❌
+    private Stage stage;
+    private Scene scene;
 
     @Override
-    public void start(Stage stage) {
-        VBox root = new VBox(10);
-        root.setPadding(new Insets(20));
-        HBox titleBox = new HBox(10);
-        HBox inputBox = new HBox(10);
-        HBox buttonBox = new HBox(10);
+    public void start(Stage stage) throws Exception {
+        stage.setWidth(800);
+        stage.setHeight(600);
 
-        Button button = new Button("Button");
-        button.setStyle("""
-        -fx-background-radius: 15;
-         -fx-font-size: 16;
-        """);
-        button.setEffect(new DropShadow());
-        Button button2 = new Button("Button2");
-        button2.setEffect(new GaussianBlur());
-        Button button3 = new Button("Button3");
+        BorderPane root = new BorderPane();
+        HBox menuBar = new HBox();
+        DisplayScene displayPage = new DisplayScene(stage);
+        editScene editScene = new editScene(stage);
 
-        TextField textField = new TextField("Enter text");
-        Label title = new Label("TodoList");
-        title.setFont(new Font(30));
+        root.setTop(menuBar);
+        root.setCenter(displayPage.getDisplayPage());
 
-        titleBox.getChildren().addAll(title);
-        inputBox.getChildren().addAll(
-                textField);
-        buttonBox.getChildren().addAll(
-                button,
-                button2,
-                button3);
-        root.getChildren().addAll(
-                titleBox,
-                inputBox,
-                buttonBox);
+        Button displayButton = new Button("Display");
+        displayButton.setStyle("-fx-background-color: #f0f0f0;" +
+                "-fx-background-radius: 0");
+        displayButton.setOnAction(e -> {
+            root.setTop(menuBar);
+            root.setCenter(displayPage.getDisplayPage());
+        });
 
-        Scene scene = new Scene(root, 500, 400);
+        Button editButton = new Button("Edit");
+        editButton.setStyle("-fx-background-color: #f0f0f0;" +
+                "-fx-background-radius: 0");
+        editButton.setOnAction(e -> {
+            root.setTop(menuBar);
+            root.setCenter(editScene.getEditPage());
+        });
 
-        scene.setFill(Color.WHITE);
+        Button helpButton = new Button("Help");
+        helpButton.setOnAction(e -> {
 
-        stage.setTitle("Todo App");
-        stage.setScene(scene);
+        });
+
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {
+
+        });
+
+        menuBar.getChildren().addAll(displayButton,
+                editButton,
+                helpButton,
+                backButton);
+
+        stage.setScene(new Scene(root));
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }
