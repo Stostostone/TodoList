@@ -9,6 +9,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+//TODO: button事件绑定 ✔️
+//TODO: 添加TODOList完整逻辑  状态:✔️
+//TODO: 添加Observable和ListCell和文件持久化  状态:❌
+//TODO: 添加流畅动画  状态:❌
+//TODO: 添加CSS美化  状态:❌
+
 public class UiApp extends Application {
     private Stage stage;
     private Scene scene;

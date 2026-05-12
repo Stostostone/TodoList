@@ -16,11 +16,9 @@ import javafx.stage.Stage;
 
 public class UiApp_backup extends Application {
 
-    //TODO: button事件绑定
-    //TODO: 添加TODOList完整逻辑  状态:❌
-    //TODO: 添加流畅动画  状态:❌
-    //TODO: 美化  状态:❌
-
+    //------------------------------------------
+    //原Ui拆分为Ui和Page，已弃用
+    //------------------------------------------
     @Override
     public void start(Stage stage) {
         VBox editRoot = new VBox(10);
