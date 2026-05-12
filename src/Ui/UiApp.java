@@ -1,59 +1,102 @@
 package Ui;
 
+import Source.ToDoList.TodoService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UiApp extends Application {
     private Stage stage;
     private Scene scene;
+    private TodoService todoService = new TodoService();
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setWidth(800);
-        stage.setHeight(600);
+        stage.setWidth(340);
+        stage.setHeight(500);
 
         BorderPane root = new BorderPane();
+        VBox emptyVBox = new VBox();
         HBox menuBar = new HBox();
-        DisplayScene displayPage = new DisplayScene(stage);
-        editScene editScene = new editScene(stage);
+        HBox buttonBar = new HBox();
+        DisplayScene displayPage = new DisplayScene(stage, todoService);
+        editScene editPage = new editScene(stage, todoService, displayPage);
+        addScene addPage = new addScene(stage, todoService, displayPage);
+        helpScene helpPage = new helpScene(stage, editPage, displayPage);
 
         root.setTop(menuBar);
         root.setCenter(displayPage.getDisplayPage());
 
         Button displayButton = new Button("Display");
-        displayButton.setStyle("-fx-background-color: #f0f0f0;" +
+        displayButton.setStyle("-fx-background-color: #f5f5f5;" +
                 "-fx-background-radius: 0");
         displayButton.setOnAction(e -> {
+            displayPage.refreshList();
             root.setTop(menuBar);
             root.setCenter(displayPage.getDisplayPage());
+            root.setRight(emptyVBox);
+            root.setBottom(buttonBar);
+            stage.setWidth(340);
         });
 
-        Button editButton = new Button("Edit");
-        editButton.setStyle("-fx-background-color: #f0f0f0;" +
+        Button addButton = new Button("Add");
+        addButton.setStyle("-fx-background-color: #f5f5f5;" +
                 "-fx-background-radius: 0");
-        editButton.setOnAction(e -> {
+        addButton.setOnAction(e -> {
             root.setTop(menuBar);
-            root.setCenter(editScene.getEditPage());
+            root.setRight(addPage.getAddPage());
+            stage.setWidth(700);
         });
 
         Button helpButton = new Button("Help");
+        helpButton.setStyle("-fx-background-color: #f5f5f5;" +
+                "-fx-background-radius: 0");
         helpButton.setOnAction(e -> {
-
+            root.setTop(menuBar);
+            root.setCenter(helpPage.getHelpScene());
+            root.setRight(emptyVBox);
+            stage.setWidth(340);
         });
 
         Button backButton = new Button("Back");
+        backButton.setStyle("-fx-background-color: #f5f5f5;" +
+                "-fx-background-radius: 0");
         backButton.setOnAction(e -> {
-
+            displayPage.refreshList();
+            root.setTop(menuBar);
+            root.setRight(emptyVBox);
+            root.setCenter(displayPage.getDisplayPage());
+            root.setBottom(buttonBar);
+            stage.setWidth(340);
         });
 
-        menuBar.getChildren().addAll(displayButton,
-                editButton,
+        Button deleteButton = new Button("Delete");
+        deleteButton.setStyle("-fx-background-color: #f5f5f5;" +
+                "-fx-background-radius: 0");
+        deleteButton.setOnAction(e -> {
+            displayPage.deleteButton();
+            displayPage.refreshList();
+        });
+
+        Button editButton = new Button("Edit");
+        editButton.setStyle("-fx-background-color: #f5f5f5;" +
+                "-fx-background-radius: 0");
+        editButton.setOnAction(e -> {
+            root.setTop(menuBar);
+            root.setRight(editPage.getEditPage());
+            stage.setWidth(650);
+        });
+
+        menuBar.getChildren().addAll(
+                displayButton,
+                addButton,
                 helpButton,
                 backButton);
+        buttonBar.getChildren().addAll(editButton, deleteButton);
 
         stage.setScene(new Scene(root));
         stage.show();

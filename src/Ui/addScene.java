@@ -12,48 +12,45 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class editScene {
+public class addScene {
 
-    VBox editPage = new VBox(10);
-    HBox editButtonPage = new HBox(10);
+    VBox addPage = new VBox(10);
+    HBox addButtonPage = new HBox(10);
     ListView<Text> list = new ListView<Text>();
     HBox nameTextBox = new HBox(10);
     HBox detailTextBox = new HBox(10);
     HBox dateTextBox = new HBox(10);
 
-    public editScene(Stage stage, TodoService todoService, DisplayScene displayPage) {
-        editPage.setPadding(new Insets(30));
-        editButtonPage.setPadding(new Insets(30));
+    public addScene(Stage stage, TodoService todoService, DisplayScene displayPage) {
+        addPage.setPadding(new Insets(30));
+        addButtonPage.setPadding(new Insets(30));
 
-        Text title = new Text("Edit: ");
+        Text title = new Text("Add: ");
         Label name = new Label("Todo name: ");
         Label detail = new Label("Todo detail: ");
         Label date = new Label("Todo date: ");
 
         TextField nameField = new TextField();
-        nameField.setStyle("-fx-border-color: #f5f5f5");
+        nameField.setStyle("-fx-border-color: #f0f0f0");
         nameField.setPromptText("Todo name");
-        nameField.setMaxWidth(200);
+        nameField.setMaxWidth(1000);
 
         TextField detailField = new TextField();
-        detailField.setStyle("-fx-border-color: #f5f5f5");
+        detailField.setStyle("-fx-border-color: #f0f0f0");
         detailField.setPromptText("details");
-        detailField.setMaxWidth(200);
+        detailField.setMaxWidth(1000);
 
         TextField dateField = new TextField();
-        dateField.setStyle("-fx-border-color: #f5f5f5");
+        dateField.setStyle("-fx-border-color: #f0f0f0");
         dateField.setPromptText("date");
-        dateField.setMaxWidth(200);
+        dateField.setMaxWidth(1000);
 
-        Button saveButton = new Button("save");
-        saveButton.setOnAction(e -> {
+        Button addButton = new Button("add");
+        addButton.setOnAction(e -> {
             String inputName = nameField.getText();
             String inputDetail = detailField.getText();
             String inputDate = dateField.getText();
-            int index =  list.getSelectionModel().getSelectedIndex() + 1;
-            todoService.setTodoName(inputName, index);
-            todoService.setTodoDetail(inputDetail, index);
-            todoService.setTodoDate(inputDate, index);
+            todoService.addTodo(inputName, inputDetail, inputDate);
             dateField.clear();
             nameField.clear();
             detailField.clear();
@@ -65,19 +62,19 @@ public class editScene {
             dateField.clear();
             nameField.clear();
             detailField.clear();
-            displayPage.refreshList();
+            stage.setScene(addPage.getScene());
         });
 
         nameTextBox.getChildren().addAll(name, nameField);
         detailTextBox.getChildren().addAll(detail, detailField);
         dateTextBox.getChildren().addAll(date, dateField);
-        editButtonPage.getChildren().addAll(saveButton, cancelButton);
-        editPage.getChildren().addAll(title, nameTextBox, detailTextBox, dateTextBox, editButtonPage);
-        editButtonPage.getChildren().addAll();
+        addButtonPage.getChildren().addAll(addButton, cancelButton);
+        addPage.getChildren().addAll(title, nameTextBox, detailTextBox, dateTextBox, addButtonPage);
+        addButtonPage.getChildren().addAll();
     }
 
-    public Node getEditPage() {
-        return editPage;
+    public Node getAddPage() {
+        return addPage;
     }
-    public Node getEditButtonPage() {return editButtonPage;}
+    public Node getAddButtonPage() {return addButtonPage;}
 }
