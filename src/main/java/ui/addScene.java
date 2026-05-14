@@ -1,6 +1,6 @@
-package Ui;
+package ui;
 
-import Source.ToDoList.TodoService;
+import service.TodoService;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

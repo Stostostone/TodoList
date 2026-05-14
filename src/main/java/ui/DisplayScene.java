@@ -1,6 +1,6 @@
-package Ui;
+package ui;
 
-import Source.ToDoList.TodoService;
+import service.TodoService;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -48,7 +48,7 @@ public class DisplayScene {
         list.setItems(FXCollections.observableArrayList(
                 IntStream.range(0, todoService.getSize())
                         .mapToObj(i -> (i + 1) + ". " +
-                                todoService.getTodo(i).getName() + " | " +
+                                todoService.getTodo(i).getTodo() + " | " +
                                 todoService.getTodo(i).getDetails() + " | " +
                                 todoService.getTodo(i).getDate())
                         .toList()

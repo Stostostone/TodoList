@@ -1,9 +1,11 @@
-package Source.ToDoList;
+package model;
 
 public class TodoList {
     private String todo;
     private String details;
     private String date;
+
+    public TodoList(){}
 
     public TodoList(String todo, String details, String date){
         this.todo = todo;
@@ -11,7 +13,7 @@ public class TodoList {
         this.date = date;
     }
 
-    public String getName(){
+    public String getTodo(){
         return todo;
     }
     public String getDetails(){

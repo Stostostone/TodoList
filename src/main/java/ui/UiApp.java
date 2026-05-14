@@ -1,6 +1,6 @@
-package Ui;
+package ui;
 
-import Source.ToDoList.TodoService;
+import service.TodoService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -54,7 +54,9 @@ public class UiApp extends Application {
                 "-fx-background-radius: 0");
         addButton.setOnAction(e -> {
             root.setTop(menuBar);
+            root.setCenter(displayPage.getDisplayPage());
             root.setRight(addPage.getAddPage());
+            root.setBottom(buttonBar);
             stage.setWidth(700);
         });
 
@@ -63,6 +65,7 @@ public class UiApp extends Application {
                 "-fx-background-radius: 0");
         helpButton.setOnAction(e -> {
             root.setTop(menuBar);
+            root.setCenter(displayPage.getDisplayPage());
             root.setCenter(helpPage.getHelpScene());
             root.setRight(emptyVBox);
             stage.setWidth(340);
@@ -94,6 +97,7 @@ public class UiApp extends Application {
         editButton.setOnAction(e -> {
             root.setTop(menuBar);
             root.setRight(editPage.getEditPage());
+            root.setBottom(buttonBar);
             stage.setWidth(650);
         });
 

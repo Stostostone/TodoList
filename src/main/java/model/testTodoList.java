@@ -1,9 +1,15 @@
-package Source.ToDoList;
+package model;
+
+import service.TodoService;
 
 import java.util.Scanner;
 
 //TODO:加退出功能,输入校验
 //TODO: 加文件持久
+
+//------------------------------------------------
+//从控制台输出转到UI，废弃控制台输出格式
+//------------------------------------------------
 
 public class testTodoList {
     public static void main(String[] args){
@@ -51,7 +57,7 @@ public class testTodoList {
                     System.out.print("   name       detail       date\n");
                     for (int i = 0; i < todoService.getSize(); i++){
                     System.out.print((i+1) + ": ");
-                    System.out.printf("%-10s %-15s %-20s\n",todoService.getTodo(i).getName(),todoService.getTodo(i).getDetails(),todoService.getTodo(i).getDate());
+                    System.out.printf("%-10s %-15s %-20s\n",todoService.getTodo(i).getTodo(),todoService.getTodo(i).getDetails(),todoService.getTodo(i).getDate());
                     }
                     if (todoService.getSize() == 0){
                         System.out.println("no todo");
