@@ -22,6 +22,8 @@ public class UiApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        todoService.loadTodo();  //初始化数据，读取数据
+
         stage.setWidth(340);
         stage.setHeight(500);
 
