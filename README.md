@@ -2,6 +2,9 @@
 
 A lightweight desktop Todo application built with Java and JavaFX.
 
+> [!NOTE]
+> I will rewrite the UI using FXML in a new branch.
+
 ## Features
 
 * Add / Edit / Delete Todo
@@ -47,7 +50,6 @@ src
 * CSS theme support
 * JSON persistence
 * Windows executable packaging
-* AI task assistant integration
 * Add finish todo function
 
 ## Author
